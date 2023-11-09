@@ -39,4 +39,8 @@ CartManager cartManager = new CartManager();
 cartManager.Add(product1);
 cartManager.Add(product2);
 
+cartManager.Add2("Armut", "Yeşil Armut", 12,10);
+cartManager.Add2("Elma", "Yeşil Elma", 12,9);
+cartManager.Add2("Karpuz", "Diyarbakır karpuzu", 12,8);
+
 Console.ReadLine();

@@ -12,5 +12,10 @@ namespace Methods
         {
             Console.WriteLine("Tebrikler. Sepete eklendi : " + product.Name);
         }
+
+        public void Add2(string productName,string description,double price,int stock)
+        {
+            Console.WriteLine("Tebrikler. Sepete eklendi : " + productName);
+        }
     }
 }
