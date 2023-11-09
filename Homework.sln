@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{C690CCB1-B62
 	ProjectSection(SolutionItems) = preProject
 		SqlQuery_1-25.sql = SqlQuery_1-25.sql
 		SqlQuery_26-85.sql = SqlQuery_26-85.sql
+		SqlQuery_86-125.sql = SqlQuery_86-125.sql
 		Sql_Query_1-25.txt = Sql_Query_1-25.txt
 	EndProjectSection
 EndProject
