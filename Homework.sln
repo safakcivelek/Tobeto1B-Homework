@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maths", "CSharp\OOP2\Maths\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValueAndReferenceTypes", "CSharp\OOP2\ValueAndReferenceTypes\ValueAndReferenceTypes.csproj", "{7605694A-EDB5-4369-A3E0-32CF180AF7A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOP1", "CSharp\OOP2\OOP1\OOP1.csproj", "{62003D98-333B-4611-AA66-6F1CE386293F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oop1", "CSharp\OOP2\OOP1\Oop1.csproj", "{62003D98-333B-4611-AA66-6F1CE386293F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collections", "CSharp\OOP2\Collections\Collections.csproj", "{B816D320-99FD-4ACF-86EB-410FAE2D7FF0}"
 EndProject
