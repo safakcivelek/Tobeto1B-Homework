@@ -21,5 +21,3 @@ Product product2 = new Product
 ProductManager productManager = new ProductManager();
 productManager.Add(product1);
 Console.WriteLine(product1.ProductName);
-
-
