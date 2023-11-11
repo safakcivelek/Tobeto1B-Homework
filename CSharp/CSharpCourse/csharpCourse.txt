@@ -1,3 +1,0 @@
-
-
-// CSharpCourse ödevi solution'i, CSharp klasörünün içinde mevcuttur.
