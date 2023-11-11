@@ -32,6 +32,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oop3", "CSharp\OOP2\Oop3\Oop3.csproj", "{64B19FEA-D166-4E25-9C2D-F97FA60F58C0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSharpCourse", "CSharpCourse", "{D7C078C0-8AD6-49D9-8BC6-7CB63DF85DD9}"
+	ProjectSection(SolutionItems) = preProject
+		csharpCourse.txt = csharpCourse.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
