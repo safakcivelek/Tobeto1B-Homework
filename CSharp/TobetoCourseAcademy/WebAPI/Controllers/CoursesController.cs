@@ -25,7 +25,7 @@ namespace WebAPI.Controllers
             //Dependency chain --
             var result = _courseService.GetAll();
             if (result.Success)
-            {
+            {               
                 return Ok(result.Data);//200
             }
             return BadRequest(result.Message);//400
@@ -39,7 +39,7 @@ namespace WebAPI.Controllers
             {
                 return Ok(result);
             }
-            return BadRequest(result);
+            return NotFound(result);//404
         }
 
         [HttpPost("add")]
@@ -50,7 +50,7 @@ namespace WebAPI.Controllers
             {
                 return Ok(result);
             }
-            return BadRequest(result);
+            return BadRequest(result);//400
         }
         //Silme için Delete
         //Güncelleme için Update

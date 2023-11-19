@@ -14,8 +14,14 @@ builder.Services.AddControllers();
 //Autofac bize AOP yapýsýný sunar.
 //Autofac, Ninject, CastleWindsor, StructureMap, LightInjecti DryInject ---> IoC Container
 //AOP =>  Bir metodun önünde sonunda o metod hata verdiðinde o hatalarýn yazýldýðý yerdir. Log'larýn tutulduðu yerdir diyebiliriz.
+
+//Course
 builder.Services.AddSingleton<ICourseService, CourseManager>();
 builder.Services.AddSingleton<ICourseDal, EfCourseDal>();
+//Category
+builder.Services.AddSingleton<ICategoryService, CategoryManager>();
+builder.Services.AddSingleton<ICategoryDal, EfCategoryDal>();
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
