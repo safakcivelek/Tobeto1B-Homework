@@ -28,16 +28,28 @@ namespace DataAccess.Concretes.EntityFramework
             using (CourseAcademyContext context = new CourseAcademyContext())
             {
                 var result = from c in context.Courses
-                                    join ct in context.Categories
-                                    on c.CategoryId equals ct.Id
-                                    select new CourseDetailDto
-                                    {
-                                        CourseId = c.Id,
-                                        CourseName = c.Name,
-                                        CategoryName = ct.Name,
-                                        Price = c.Price
-                                    };
-
+                             join cat in context.Categories on c.CategoryId equals cat.Id
+                             join ci in context.CoursesInstructors on c.Id equals ci.CourseId
+                             join i in context.Instructors on ci.InstructorId equals i.Id
+                             group i by new
+                             {
+                                 c.Id,
+                                 c.Name,
+                                 c.Price,
+                                 catName = cat.Name
+                             } into grouped
+                             select new CourseDetailDto
+                             {
+                                 CourseId = grouped.Key.Id,
+                                 CourseName = grouped.Key.Name,
+                                 Price = grouped.Key.Price,
+                                 CategoryName = grouped.Key.catName,
+                                 Instructors = grouped.Select(i => new InstructorDetailDto
+                                 {
+                                     InstructorId = i.Id,
+                                     InstructorName = $"{i.FirstName} {i.LastName}"
+                                 }).ToList()
+                             };
                 return result.ToList();
             }
         }

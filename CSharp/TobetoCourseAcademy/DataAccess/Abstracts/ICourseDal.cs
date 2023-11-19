@@ -5,8 +5,8 @@ using Entities.DTOs;
 namespace DataAccess.Abstracts
 {
 	public interface ICourseDal:IEntityRepository<Course>
-	{
-        List<CourseDetailDto> GetCourseDetails();               
+	{        
+        List<CourseDetailDto> GetCourseDetails();              
     }
 }
 
