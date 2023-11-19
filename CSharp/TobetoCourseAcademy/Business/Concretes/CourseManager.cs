@@ -1,5 +1,6 @@
 ﻿using Business.Abstracts;
 using Business.Constants;
+using Business.Constants.Messages;
 using Core.Utilities.Results.Abstracts;
 using Core.Utilities.Results.Concretes;
 using DataAccess.Abstracts;
@@ -23,59 +24,91 @@ namespace Business.Concretes
             //Özetle; EfCourseDal, InMemoryCourseDal, OracleCourseDal gibi yapılara ulaşmak için ICourseDal gibi bir interface kullanmalıyız. Böylece bu farklı classlara direkt olarak bağımlı olmayız. 
             #endregion
         }
-        public IDataResult<Course> GetById(int courseId) //tek veri çeker
+        public IDataResult<Course> GetById(int courseId) //tek veri getirir
         {
-            //Consturctor içinde ICourseDal ile CourseManager class'ımın referans bilgisine ulaşabildiğimden dolayı artık CourseManager sınıfımın metodlarına erişebiliyorum 
-            return new SuccessDataResult<Course>(_courseDal.Get(c => c.Id == courseId),Messages.CourseListed);//düzenle,message gibi...
-        }
-        public IDataResult<List<Course>> GetAll() //liste çeker
-        {
-            if (DateTime.Now.Hour == 15)
+            //Consturctor içinde ICourseDal ile CourseManager class'ımın referans bilgisine ulaşabildiğimden dolayı artık CourseManager sınıfımın metodlarına erişebiliyorum. 
+
+            var course = _courseDal.Get(c => c.Id == courseId);       
+            if (course != null)
             {
-                return new ErrorDataResult<List<Course>>(Messages.MaintenanceTime);//bakımda
+                return new SuccessDataResult<Course>(_courseDal.Get(c => c.Id == courseId), CourseMessages.GetOne(course.Name));
             }
-            return new SuccessDataResult<List<Course>>(_courseDal.GetAll(), Messages.CourseListed);
+            return new ErrorDataResult<Course>(CourseMessages.NotFound(isPlural: false));            
+        }
+        public IDataResult<List<Course>> GetAll() //liste getirir
+        {
+            var courseList = _courseDal.GetAll();            
+            if (courseList.Any())
+            {
+                if (DateTime.Now.Hour==15)
+                {
+                    return new ErrorDataResult<List<Course>>(CourseMessages.MaintenanceTime());
+                }
+                return new SuccessDataResult<List<Course>>(_courseDal.GetAll(),CourseMessages.Listed());
+            }        
+            return new ErrorDataResult<List<Course>>(CourseMessages.NotFound(isPlural:true));
         }
         public IDataResult<List<Course>> GetAllByCategoryId(int categoryId)//5
         {
             //GetAll metodum içerisinde bir "Expression" yani bir "Lambda" ifadesi bekliyor
             //GetlAll Lamda yazımı => GetAll(p=>p.CategoryId == id)
-            return new SuccessDataResult<List<Course>>(_courseDal.GetAll(c => c.CategoryId == categoryId));//düzenle
+            var data = _courseDal.GetAll(c => c.CategoryId == categoryId);
+            if (data != null)
+            {
+                return new SuccessDataResult<List<Course>>(data,CourseMessages.Listed());
+            }
+            return new ErrorDataResult<List<Course>>(CourseMessages.NotFound(isPlural: true));
         }
         public IDataResult<List<Course>> GetByUnitPrice(decimal min, decimal max)
         {
-            return new SuccessDataResult<List<Course>>(_courseDal.GetAll(c => c.Price >= min && c.Price <= max));
+            var datas = _courseDal.GetAll(c => c.Price >= min && c.Price <= max);
+            if (datas.Any())
+            {
+                return new SuccessDataResult<List<Course>>(datas, CourseMessages.Listed());
+            }
+            return new ErrorDataResult<List<Course>>(CourseMessages.NotFound(isPlural: true));
+            //hata durumu yönetilebilir!
         }
         public IDataResult<List<CourseDetailDto>> GetCourseDetails()
         {
-            if (DateTime.Now.Hour == 5)
+            var datas = _courseDal.GetCourseDetails();
+            if (datas.Any())
             {
-                return new ErrorDataResult<List<CourseDetailDto>>(Messages.MaintenanceTime);//bakımda
+                return new SuccessDataResult<List<CourseDetailDto>>(datas, CourseMessages.Listed());               
             }
-            return new SuccessDataResult<List<CourseDetailDto>>(_courseDal.GetCourseDetails(),Messages.CourseListed);
+            return new ErrorDataResult<List<CourseDetailDto>>(CourseMessages.NotFound(isPlural:true));
         }
         public IResult Add(Course course)
         {
-            //Bana parametre olarak gönderilen veriyi al veritabanına ekle
-            if (course.Name.Length < 2)
-            {
-                return new ErrorResult(Messages.CourseAdded);
-            }
+            //Bana parametre olarak gönderilen veriyi al veritabanına ekle           
             _courseDal.Add(course);
-            return new Result(true, "Kurs eklendi");
+            return new Result(true, CourseMessages.Added());
         }
-        public void Delete(Course course)
+        public IResult Delete(Course course)
         {
             #region Notlarım:
             //Bize parametre ile verinin referans bilgisi gelir //101  ve bu referans numarasının veritabanımızda kontrolü yapılır.
             //Eğer veritabanında bu referans mevcut ise referansı silerek veriyi kaldırabiliriz.
             //Eğer ki gelen referans numarasının veritabanında olup olmadığı kontrolünü yapmadan kaldırmayı dener isek , bu referans numarasının olmadığı durumlarda,  haliyle olmayan bir referansı,veriyi silemeyeceğimizden dolayı hatalı bir işlem ile karşılaşırız!
             #endregion
-            _courseDal.Delete(course);
+            var data = _courseDal.Get(c => c.Id == course.Id);
+            if (data !=null)
+            {
+                _courseDal.Delete(course);
+                return new Result(true,CourseMessages.Deleted());
+            }
+            return new ErrorResult(CourseMessages.NotFound(isPlural: false));
+            
         }
-        public void Update(Course course)
+        public IResult Update(Course course)
         {
-            _courseDal.Update(course);
+            var data = _courseDal.Get(c => c.Id == course.Id);
+            if (data != null)
+            {
+                _courseDal.Update(course);
+                return new Result(true, CourseMessages.Updated());
+            }
+            return new ErrorResult(CourseMessages.NotFound(isPlural: false));
         }
     }
 }

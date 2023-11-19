@@ -15,22 +15,37 @@ namespace Business.Constants.Messages
         {
             return $"{instructorName} instructor has been successfully deleted.";
         }
-        public static string Listed(string instructorName, bool isPlural = false)
+        public static string Listed()
         {
-            //Liste veya tek veri icin farkli donus mesajlari
-            return isPlural
-                ? "The instructors have been successfully listed."
-                : $"{instructorName} instructor has been retrived successfully.";
+            return "The instructors have been successfully listed.";
         }
-        public static string NotFound(string instructorName, bool isPlural = false)
+        public static string GetOne(string instructorName)
+        {
+            return $"{instructorName} instructor has been retrived successfully.";
+        }
+        public static string NotFound(bool isPlural = false)
         {
             return isPlural
                 ? "No instructors found."
-                : $"No instructor named {instructorName} found.";
+                : "No instructor found.";
         }
         public static string MaintenanceTime()
         {
             return "The system is under maintenance.";
+        }
+
+        //Bu metodlara geri dönüş tipi eklendikten sonra bu alandaki mesaj metodları silinecek!
+        public static string Added()
+        {
+            return "The instructor has been successfully added.";
+        }
+        public static string Updated()
+        {
+            return "The instructor has been successfully updated.";
+        }
+        public static string Deleted()
+        {
+            return "The instructor has been successfully deleted.";
         }
     }
 }
