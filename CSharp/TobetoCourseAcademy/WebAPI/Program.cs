@@ -21,6 +21,9 @@ builder.Services.AddSingleton<ICourseDal, EfCourseDal>();
 //Category
 builder.Services.AddSingleton<ICategoryService, CategoryManager>();
 builder.Services.AddSingleton<ICategoryDal, EfCategoryDal>();
+//Instructor
+builder.Services.AddSingleton<IInstructorService, InstructorManager>();
+builder.Services.AddSingleton<IInstructorDal, EfInstructorDal>();
 
 
 builder.Services.AddEndpointsApiExplorer();
