@@ -9,11 +9,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-//AddSingleton<>:(); birisi senden ICourseService istersen arka planda CourseManager sýnýfýný 1 kereye mahsus new'le ve new'lenmiþ olaný ICourseService istenen heryerde gönder.1milyon tane yerde bile ihtiyaç olsa ayný newlenmiþ CoursManager'i gönder. Yani 1 kere bir referans numarasý oluþtur örneðin // 101  olsun ve heryere o referans numarasýný gönder.
+//***AddSingleton: Uygulama ayaða kalktýðýnda ilgili interface (ICourseService) herhangi biryerde çaðrýldýðýnda ilgili class için (CourseManager) bir örnek yani bir referans oluþturulur. Bundan sonra bu class'a (CourseManager) nerede ihtiyaç olursa olsun, oluþan ilk örneðin referans bilgisi gönderilir.Ta ki uygulama kapanana kadar!
 
-//Autofac bize AOP yapýsýný sunar.
-//Autofac, Ninject, CastleWindsor, StructureMap, LightInjecti DryInject ---> IoC Container
-//AOP =>  Bir metodun önünde sonunda o metod hata verdiðinde o hatalarýn yazýldýðý yerdir. Log'larýn tutulduðu yerdir diyebiliriz.
+//***AddScoped: ilgili class'ýn örneði, kullanýldýðý scope içerisinde her çaðrýldýðýnda ayný referans bilgisini verir Fakat her talep veya istek için. Örneðin api controller içinde bizim Get(), Update(), GetAll() gibi metodlarýmýza istek atýldýðýnda bu metodlara bir istek bir talep oluþturulur ve her metod için bir talep döner.Ayný metodun tekrar çaðrýlmasýda ayrý bir istektir,taleptir.
+
+//***AddTransient: Bu ise ilgili class'a ihtiyaç duyulan heryerde yani ilgili interfacenin çaðrýldýðý heryerde scope içi ve dýþý farketmeksizin her seferinde yeni bir örnek oluþturur onu gönderir.Yani yeni bir referans bilgisi. 
 
 //Course
 builder.Services.AddSingleton<ICourseService, CourseManager>();
@@ -27,6 +27,10 @@ builder.Services.AddSingleton<IInstructorDal, EfInstructorDal>();
 //CourseInstructor
 builder.Services.AddSingleton<ICourseInstructorService, CourseInstructorManager>();
 builder.Services.AddSingleton<ICourseInstructorDal, EfCourseInstructor>();
+
+//Autofac bize AOP yapýsýný sunar.
+//Autofac, Ninject, CastleWindsor, StructureMap, LightInjecti DryInject ---> IoC Container
+//AOP =>  Bir metodun önünde sonunda o metod hata verdiðinde o hatalarýn yazýldýðý yerdir. Log'larýn tutulduðu yerdir diyebiliriz.
 
 
 builder.Services.AddEndpointsApiExplorer();
