@@ -4,7 +4,7 @@ using Entities.Concretes;
 
 namespace DataAccess.Concretes.EntityFramework
 {
-    public class EfCourseInstructor : EfEntityRepositoryBase<CourseInstructor, CourseAcademyContext>, ICourseInstructorDal
+    public class EfCourseInstructorDal : EfEntityRepositoryBase<CourseInstructor, CourseAcademyContext>, ICourseInstructorDal
     {      
         
     }
