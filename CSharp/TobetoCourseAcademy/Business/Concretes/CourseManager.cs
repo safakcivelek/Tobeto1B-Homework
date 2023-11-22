@@ -1,11 +1,14 @@
 ﻿using Business.Abstracts;
 using Business.Constants;
 using Business.Constants.Messages;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results.Abstracts;
 using Core.Utilities.Results.Concretes;
 using DataAccess.Abstracts;
 using Entities.Concretes;
 using Entities.DTOs;
+using FluentValidation;
 
 namespace Business.Concretes
 {
@@ -80,7 +83,8 @@ namespace Business.Concretes
         }
         public IResult Add(Course course)
         {
-            //Bana parametre olarak gönderilen veriyi al veritabanına ekle           
+            ValidationTool.Validate(new CourseValidator(), course);
+                       
             _courseDal.Add(course);
             return new Result(true, CourseMessages.Added());
         }
