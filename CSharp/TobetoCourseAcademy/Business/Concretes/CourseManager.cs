@@ -2,6 +2,7 @@
 using Business.Constants;
 using Business.Constants.Messages;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results.Abstracts;
 using Core.Utilities.Results.Concretes;
@@ -69,8 +70,7 @@ namespace Business.Concretes
             {
                 return new SuccessDataResult<List<Course>>(datas, CourseMessages.Listed());
             }
-            return new ErrorDataResult<List<Course>>(CourseMessages.NotFound(isPlural: true));
-            //hata durumu yönetilebilir!
+            return new ErrorDataResult<List<Course>>(CourseMessages.NotFound(isPlural: true));            
         }
         public IDataResult<List<CourseDetailDto>> GetCourseDetails()
         {
@@ -81,9 +81,12 @@ namespace Business.Concretes
             }
             return new ErrorDataResult<List<CourseDetailDto>>(CourseMessages.NotFound(isPlural:true));
         }
+
+        //Add metodunu doğrula CourseValidator'daki kurallara göre!
+        [ValidationAspect(typeof(CourseValidator))]
         public IResult Add(Course course)
         {
-            ValidationTool.Validate(new CourseValidator(), course);
+           
                        
             _courseDal.Add(course);
             return new Result(true, CourseMessages.Added());
