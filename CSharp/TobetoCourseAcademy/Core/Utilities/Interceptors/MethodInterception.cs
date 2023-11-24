@@ -4,6 +4,9 @@ namespace Core.Utilities.Interceptors
 {
     public abstract class MethodInterception : MethodInterceptionBaseAttribute
     {
+        //Gövdesi boş ezilmeyi bekleyen metodlar. Eğer ezmez ise çalışır ama boş çalışır
+        //Yani Aspect nerede çalışacak ise ilgili metodu ezeceğiz yani gövdesini dolduracağız.
+        //İhtiyacımız olanları eziyoruz.
         protected virtual void OnBefore(IInvocation invocation) { }
         protected virtual void OnAfter(IInvocation invocation) { }
         protected virtual void OnException(IInvocation invocation, System.Exception e) { }

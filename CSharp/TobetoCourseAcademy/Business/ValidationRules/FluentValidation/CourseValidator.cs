@@ -4,6 +4,8 @@ using FluentValidation;
 namespace Business.ValidationRules.FluentValidation
 {
     //Doğrulama kuralları
+    //AbstractValidator, IValidator'ü kendine implement eder.
+    //Burada CourseValidatorun Course için geçerli olduğunu base sınıf olan AbstractValidator<Course> generic ifadesi kısmında belirtiyoruz.
     public class CourseValidator : AbstractValidator<Course>
     {
         public CourseValidator()

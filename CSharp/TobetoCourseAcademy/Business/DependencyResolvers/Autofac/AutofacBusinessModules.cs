@@ -33,6 +33,8 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<EfCourseInstructorDal>().As<ICourseInstructorDal>().SingleInstance();
 
 
+            //Burada yapılan işlem, bizim AOP desteği alan metodlarımız vardı(Add,Update vb.) işte class'larmızın bu metodlarına, AspectInterceptorSelector aracılığı ile Aspectler tarafından müdahele edilmesi sağlanır.
+            //Yani, ValidationAspect, LogAspect gibi Aspect'lerin metodları etkileyebilmesini sağlar.
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()

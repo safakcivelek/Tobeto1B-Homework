@@ -82,12 +82,26 @@ namespace Business.Concretes
             return new ErrorDataResult<List<CourseDetailDto>>(CourseMessages.NotFound(isPlural:true));
         }
 
+        #region AOP / Validasyon
+        //*** Validasyon:
+        //Validasyon ile iş kuralı aynı şey değildir.
+        //Validasyon, bir nesnenin (Course) iş kurallarına dahil etmek için o nesnenin uygun olup olmadığına formatsal olarak bakmaktır.
+        //Yani verinin formatıyla ilgilenir.
+        //Örnek; ürünün adı min 2 karakter olmalı, fiyatı 0 dan büyük eşit olmalı vb.
         //Add metodunu doğrula CourseValidator'daki kurallara göre!
-        [ValidationAspect(typeof(CourseValidator))]
-        public IResult Add(Course course)
-        {
-           
-                       
+
+        //*** İş Kuralı:
+        //Örnek; bu ürün tekrar edemez, bir kategoride max 10 ürün olmalı, bir kişi max 5 ürün alabilir bakınız bunlar format ile alakalı değildir  bunlar iş kurallarımıza örnektir.
+
+        //AOP: Cross Cutting Concerns => Uygulamayı dikine kesen ilgi alanları
+        //ÖrneK; Validasyon, Cache, Transaction, Performans, Güvenlik, Log vb.
+        //İşte bu 6 madde "AOP" yapısı ile rahatlıkla çözülür.
+        //AOP: Özetle, AOP, tekrar eden kodu temsil eden ve genellikle geniş bir uygulama boyunca dağılan konuları modüler hale getirme amacını taşıyan bir programlama paradigmasıdır. 
+        #endregion
+        //Add metodunun Course course parametresini ValidationAspect ile alır gönderir ve kurallarına tabi tutar.
+        [ValidationAspect(typeof(CourseValidator))] // Aspect       
+        public IResult Add(Course course)  
+        {                               
             _courseDal.Add(course);
             return new Result(true, CourseMessages.Added());
         }
