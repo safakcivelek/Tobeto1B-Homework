@@ -36,6 +36,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSharpCourse", "CSharpCours
 		csharpCourse.txt = csharpCourse.txt
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "React", "React", "{5245EF7A-94BD-45E7-B612-FB8EF5D94756}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intro", "React\Intro\Intro.csproj", "{F0F6ED7A-F87B-4B57-9AD4-646B512B5047}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,6 +78,10 @@ Global
 		{64B19FEA-D166-4E25-9C2D-F97FA60F58C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64B19FEA-D166-4E25-9C2D-F97FA60F58C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64B19FEA-D166-4E25-9C2D-F97FA60F58C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0F6ED7A-F87B-4B57-9AD4-646B512B5047}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0F6ED7A-F87B-4B57-9AD4-646B512B5047}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0F6ED7A-F87B-4B57-9AD4-646B512B5047}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0F6ED7A-F87B-4B57-9AD4-646B512B5047}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,6 +97,7 @@ Global
 		{7D67B9A0-9A03-42FA-8B6E-E7A280C8BE5A} = {3FA5A81D-9CAB-479C-A0BE-E1FDD3459190}
 		{64B19FEA-D166-4E25-9C2D-F97FA60F58C0} = {3FA5A81D-9CAB-479C-A0BE-E1FDD3459190}
 		{D7C078C0-8AD6-49D9-8BC6-7CB63DF85DD9} = {A7D52545-6C48-4329-8617-6C1015099676}
+		{F0F6ED7A-F87B-4B57-9AD4-646B512B5047} = {5245EF7A-94BD-45E7-B612-FB8EF5D94756}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3B12257D-EE72-4612-ABF8-99D2C771B77C}
