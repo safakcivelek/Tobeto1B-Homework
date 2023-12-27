@@ -1,4 +1,4 @@
-import React, { useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { Icon, Label, Menu, Table } from 'semantic-ui-react'
 import ProductService from '../services/productService'
 
@@ -6,36 +6,41 @@ export default function ProductList() {
     //hook => react'ın yaşam döngüsüne müdahale etmemiz anlamına
     const [products, setProducts] = useState([])
 
-    useEffect( () =>{
+    useEffect(() => {
         let productService = new ProductService()
-        productService.getProducts().then(result =>  setProducts(result.data.data))
+        productService.getProducts().then(result => setProducts(result.data.products))
     })
-    
+
     return (
         <div>
             <Table celled>
                 <Table.Header>
                     <Table.Row>
-                        <Table.HeaderCell>Ürün Id</Table.HeaderCell>
-                        <Table.HeaderCell>Ürün Adı</Table.HeaderCell>
+                        <Table.HeaderCell>Ürün Adi</Table.HeaderCell>
+                        <Table.HeaderCell>Aciklamasi</Table.HeaderCell>
+                        <Table.HeaderCell>Fiyat</Table.HeaderCell>
+                        <Table.HeaderCell>İndirim Yüzdesi</Table.HeaderCell>
+                        <Table.HeaderCell>Stok</Table.HeaderCell>
+                        <Table.HeaderCell>Kategori</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
 
                 <Table.Body>
-                    {
-                        products.map(product => (
-                            <Table.Row key ={product.id}>
-                                <Table.Cell>{product.productName}</Table.Cell>
-                                <Table.Cell>{product.unitPrice}</Table.Cell>
-                            </Table.Row>
-                        ))
-                    }
-
+                    {products.map((product) => (
+                        <Table.Row key={product.id}>
+                            <Table.Cell>{product.title}</Table.Cell>
+                            <Table.Cell>{product.description}</Table.Cell>
+                            <Table.Cell>{product.price}</Table.Cell>
+                            <Table.Cell>{product.discountPercentage}</Table.Cell>
+                            <Table.Cell>{product.stock}</Table.Cell>
+                            <Table.Cell>{product.category}</Table.Cell>
+                        </Table.Row>
+                    ))}
                 </Table.Body>
 
                 <Table.Footer>
                     <Table.Row>
-                        <Table.HeaderCell colSpan='3'>
+                        <Table.HeaderCell colSpan='6'>
                             <Menu floated='right' pagination>
                                 <Menu.Item as='a' icon>
                                     <Icon name='chevron left' />

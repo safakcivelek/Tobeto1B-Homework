@@ -2,6 +2,6 @@ import axios from "axios"
 
 export default class ProductService{
         getProducts(){
-            return axios.get("http://localhost:")
+            return axios.get("https://dummyjson.com/products")
         }
 }
